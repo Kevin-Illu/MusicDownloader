@@ -1,4 +1,4 @@
-# todo-app
+# OASIS
 
 An Electron application with React and TypeScript
 
