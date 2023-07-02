@@ -5,7 +5,7 @@ import { useContext, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
 export const InitialSettings = () => {
-  const getPathFromDevice = window.api.getPathFromDevice
+  const getPathFromDevice = window.api.setPathFromDevice
   const { setDownloadPath, path } = useContext(SettingsContext)
   const [redirectToHome, setRedirectToHome] = useState<boolean>(false)
 

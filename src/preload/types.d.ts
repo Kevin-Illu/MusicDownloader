@@ -11,7 +11,8 @@ declare global {
 export interface IPublicAPI {
   getVideosByName: (name: string) => Promise<void>
   downloadMusicByURL: (settings: DownloadMusicSettings) => Promise<void>
-  getPathFromDevice: () => Promise<styring[]>
+  setPathFromDevice: () => Promise<styring[]>
+  getPathFromDevice: () => Promise<styring>
 }
 
 export type API_MUSIC_ACTION = typeof GET_MUSIC_BY_NAME_ACTION | typeof DOWNLOAD_MUSIC_ACTION

@@ -1,10 +1,28 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
+// TODO: clean the code here :(
+
 import { join } from 'path'
+import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
+import Store from 'electron-store'
+
 import icon from '../../resources/icon.png?asset'
-import { downloadMusicByURL, getVideosByName } from './music'
-import { DOWNLOAD_MUSIC_ACTION, GET_MUSIC_BY_NAME_ACTION, SET_PATH_ACTION } from '../preload/api'
-import { getPathFromDevice } from './music'
+
+import { setPathFromDevice, getPathFromDevice, downloadMusicByURL, getVideosByName } from './music'
+import {
+  GET_LOCAL_TRACK_PATH_ACTION,
+  DOWNLOAD_MUSIC_ACTION,
+  GET_MUSIC_BY_NAME_ACTION,
+  SET_PATH_ACTION
+} from '../preload/api'
+
+Store.initRenderer()
+export const store = new Store({
+  schema: {
+    localTracks: {
+      type: 'string'
+    }
+  }
+})
 
 function createWindow(): void {
   // Create the browser window.
@@ -14,7 +32,7 @@ function createWindow(): void {
     show: false,
     autoHideMenuBar: true,
     // show the dev tools window
-    vibrancy: 'window',
+    vibrancy: 'appearance-based',
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
@@ -27,8 +45,10 @@ function createWindow(): void {
   })
 
   ipcMain.handle(SET_PATH_ACTION, async () => {
-    console.log('getting path from ipc')
-    return await getPathFromDevice(mainWindow)
+    const localTracksPath = await setPathFromDevice(mainWindow)
+    store.set('localTracks', localTracksPath[0])
+
+    return localTracksPath
   })
 
   mainWindow.webContents.openDevTools()
@@ -83,6 +103,10 @@ app.whenReady().then(() => {
     } catch (err) {
       return null
     }
+  })
+
+  ipcMain.handle(GET_LOCAL_TRACK_PATH_ACTION, async (_) => {
+    return await getPathFromDevice()
   })
 
   app.on('activate', function () {
