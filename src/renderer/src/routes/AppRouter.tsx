@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { PrivateRoute } from './PrivateRoute'
-import { History, InitialSettings, MusicHome } from '@renderer/pages'
+import { MyTracks, InitialSettings, MusicHome } from '@renderer/pages'
 
 export const AppRouter = () => {
   return (
@@ -15,10 +15,10 @@ export const AppRouter = () => {
           }
         />
         <Route
-          path="/history"
+          path="/myTracks"
           element={
             <PrivateRoute>
-              <History />
+              <MyTracks />
             </PrivateRoute>
           }
         />

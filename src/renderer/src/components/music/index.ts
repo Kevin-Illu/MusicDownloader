@@ -1,6 +1,4 @@
 export * from './AuthorSongInformation'
 export * from './MusicList'
-export * from './SingleSong'
-export * from './SongDuration'
+export * from './MusicItem'
 export * from './skeleton'
-export * from './MusicDownloaded'

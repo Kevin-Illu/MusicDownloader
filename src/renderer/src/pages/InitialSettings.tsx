@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { SettingsContext } from '@renderer/context/settings/SettingsContext'
 import { useLoadingStates } from '@renderer/hooks'
 import { useContext, useState } from 'react'
