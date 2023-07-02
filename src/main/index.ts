@@ -7,12 +7,20 @@ import Store from 'electron-store'
 
 import icon from '../../resources/icon.png?asset'
 
-import { setPathFromDevice, getPathFromDevice, downloadMusicByURL, getVideosByName } from './music'
+import {
+  setPathFromDevice,
+  getPathFromDevice,
+  downloadMusicByURL,
+  getVideosByName,
+  getListOfLocalTracks
+} from './music'
+
 import {
   GET_LOCAL_TRACK_PATH_ACTION,
   DOWNLOAD_MUSIC_ACTION,
   GET_MUSIC_BY_NAME_ACTION,
-  SET_PATH_ACTION
+  SET_PATH_ACTION,
+  GET_TRACK_LIST_ACTION
 } from '../preload/api'
 
 Store.initRenderer()
@@ -107,6 +115,10 @@ app.whenReady().then(() => {
 
   ipcMain.handle(GET_LOCAL_TRACK_PATH_ACTION, async (_) => {
     return await getPathFromDevice()
+  })
+
+  ipcMain.handle(GET_TRACK_LIST_ACTION, async (_) => {
+    return await getListOfLocalTracks()
   })
 
   app.on('activate', function () {

@@ -13,6 +13,7 @@ export interface IPublicAPI {
   downloadMusicByURL: (settings: DownloadMusicSettings) => Promise<void>
   setPathFromDevice: () => Promise<styring[]>
   getPathFromDevice: () => Promise<styring>
+  getTracksFromDevice: () => Promise<any>
 }
 
 export type API_MUSIC_ACTION = typeof GET_MUSIC_BY_NAME_ACTION | typeof DOWNLOAD_MUSIC_ACTION

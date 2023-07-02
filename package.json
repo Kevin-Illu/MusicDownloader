@@ -24,6 +24,7 @@
     "@electron-toolkit/utils": "^1.0.2",
     "electron-store": "^8.1.0",
     "electron-updater": "^5.3.0",
+    "node-id3": "^0.2.6",
     "react-router-dom": "^6.13.0",
     "ytdl-core": "^4.11.4",
     "ytsr": "^3.8.2"
