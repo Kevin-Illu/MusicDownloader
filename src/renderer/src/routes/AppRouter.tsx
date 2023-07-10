@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { PrivateRoute } from './PrivateRoute'
-import { MyTracks, InitialSettings, MusicHome } from '@renderer/pages'
+import { MyTracks, InitialSettings, MusicHome, Track } from '@renderer/pages'
 
 export const AppRouter = () => {
   return (
@@ -24,6 +24,7 @@ export const AppRouter = () => {
         />
         <Route path="/*" element={<Navigate to="/" />} />
         <Route path="/getStarted" element={<InitialSettings />} />
+        <Route path="/track/:trackId" element={<Track />} />
       </Routes>
     </BrowserRouter>
   )
