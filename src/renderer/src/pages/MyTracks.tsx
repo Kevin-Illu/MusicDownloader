@@ -67,7 +67,7 @@ export const MyTracks = () => {
         <p>Loading...</p>
       ) : (
         <div>
-          <ul className="list-decimal list-inside flex flex-col pb-8">
+          <ul className="grid grid-cols-4 gap-6">
             {tracks && tracks.map((track) => <TrackItem key={track.namefile} {...track} />)}
           </ul>
         </div>
@@ -76,50 +76,27 @@ export const MyTracks = () => {
   )
 }
 
-// TODO: implement a single route for each track
-// TODO: add a form to edit the information about the tracks
-
 const TrackItem = (props: Metadata) => {
-  const { namefile, album, artist, genre, image, comment, title, trackNumber, year } = props
+  const { namefile } = props
 
   return (
-    <li className="grid grid-cols-8 hover:bg-gray-100 p-4 rounded relative">
+    <li className="flex flex-col hover:bg-gray-100 p-4 relative gap-2">
       <div className="col-span-2">
-        <div className="bg-gray-200 h-48 w-48 flex items-center justify-center">
+        <div className="bg-gray-200 h-64 flex items-center justify-center">
           <p className="text-8xl font-bold text-gray-400">?</p>
         </div>
       </div>
       <div className="col-span-6">
-        <p className="font-bold text-4xl italic pb-2">{namefile.replace('.mp3', '')}</p>
-        <TrackAttribute title={'title'} value={title} />
-        <TrackAttribute title={'album'} value={album} />
-        <TrackAttribute title={'artist'} value={artist} />
-        <TrackAttribute title={'year'} value={year} />
+        <p className="italic pb-2">{namefile.replace('.mp3', '')}</p>
       </div>
-      <div className="absolute border-solid border-2 border-black rounded-full p-4 bottom-0 right-0 m-4">
-        <NavLink to={`/track/${namefile.replaceAll(' ', '')}`} className="font-bold capitalize p-0">
-          <p>Edit track info</p>
+      <div className="pt-4">
+        <NavLink
+          to={`/track/${namefile}`}
+          className="bg-red-100 m-2 py-1 px-4 rounded-full absolute bottom-0 right-0 font-bold capitalize p-0"
+        >
+          Edit track
         </NavLink>
       </div>
     </li>
-  )
-}
-
-const TrackAttribute = ({
-  title,
-  value,
-  defaultValue
-}: {
-  title: string
-  value: string | undefined
-  defaultValue?: string | null
-}) => {
-  const defaultInfo = defaultValue || '"Unknow"'
-
-  return (
-    <div className="flex items-center gap-2 text-xl capitalize font-bold">
-      <p>{title}</p>
-      <p className="italic text-gray-400">{value || defaultInfo}</p>
-    </div>
   )
 }

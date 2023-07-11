@@ -1,30 +1,29 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { PrivateRoute } from './PrivateRoute'
-import { MyTracks, InitialSettings, MusicHome, Track } from '@renderer/pages'
+import { InitialSettings } from '@renderer/pages'
+import { PublicRoute } from './PublicRoute'
+import { DashboardRoutes } from './DashboardRoutes'
 
 export const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route
-          path="/"
+          path="/getStarted"
           element={
-            <PrivateRoute>
-              <MusicHome />
-            </PrivateRoute>
+            <PublicRoute>
+              <InitialSettings />
+            </PublicRoute>
           }
         />
         <Route
-          path="/myTracks"
+          path="/*"
           element={
             <PrivateRoute>
-              <MyTracks />
+              <DashboardRoutes />
             </PrivateRoute>
           }
         />
-        <Route path="/*" element={<Navigate to="/" />} />
-        <Route path="/getStarted" element={<InitialSettings />} />
-        <Route path="/track/:trackId" element={<Track />} />
       </Routes>
     </BrowserRouter>
   )

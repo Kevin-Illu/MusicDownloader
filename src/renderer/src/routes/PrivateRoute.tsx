@@ -8,9 +8,5 @@ interface Props {
 export const PrivateRoute = ({ children }: Props) => {
   const { path } = getStorageSettings()
 
-  if (path) {
-    return children
-  } else {
-    return <Navigate to={'/getStarted'} />
-  }
+  return path ? children : <Navigate to="/getStarted" />
 }
